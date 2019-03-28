@@ -1,4 +1,4 @@
-// Copyright [2019] Gabriel Frank Simonetto
+tocu// Copyright [2019] Gabriel Frank Simonetto
 #ifndef STRUCTURES_ARRAY_STACK_H
 #define STRUCTURES_ARRAY_STACK_H
 
@@ -111,4 +111,9 @@ bool structures::ArrayStack<T>::empty() {
 template<typename T>
 bool structures::ArrayStack<T>::full() {
     return (top_ + 1==max_size_);
+}
+
+int main() {
+    ArrayStack<int> meu_stack = ArrayStack();
+    meu_stack.push(4);
 }
