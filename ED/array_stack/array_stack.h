@@ -1,4 +1,4 @@
-tocu// Copyright [2019] Gabriel Frank Simonetto
+// Copyright [2019] Gabriel Frank Simonetto
 #ifndef STRUCTURES_ARRAY_STACK_H
 #define STRUCTURES_ARRAY_STACK_H
 
@@ -71,13 +71,16 @@ void structures::ArrayStack<T>::push(const T& data) {
     if (full()) {
         throw std::out_of_range("pilha cheia");
     } else {
-        contents[top_] = data;
         top_++;
+        contents[top_] = data;
     }
 }
 
 template<typename T>
 T structures::ArrayStack<T>::pop() {
+    if (empty()) {
+        throw std::out_of_range("pilha vazia");
+    }
     T output = contents[top_];
     top_--;
     return output;
@@ -85,7 +88,10 @@ T structures::ArrayStack<T>::pop() {
 
 template<typename T>
 T& structures::ArrayStack<T>::top() {
-    return &contents[top_];
+    if (empty()) {
+        throw std::out_of_range("pilha vazia");
+    }
+    return contents[top_];
 }
 
 template<typename T>
@@ -105,15 +111,10 @@ std::size_t structures::ArrayStack<T>::max_size() {
 
 template<typename T>
 bool structures::ArrayStack<T>::empty() {
-    return (top_==-1);
+    return (top_ == -1);
 }
 
 template<typename T>
 bool structures::ArrayStack<T>::full() {
-    return (top_ + 1==max_size_);
-}
-
-int main() {
-    ArrayStack<int> meu_stack = ArrayStack();
-    meu_stack.push(4);
+    return (top_ + 1 == max_size_);
 }
