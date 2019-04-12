@@ -44,3 +44,52 @@ private:
 }
 
 #endif
+
+// pq que eu to repetindo tanta coisa entre um cpp e o h??
+
+template<typename T>
+structures::ArrayList<T>::ArrayList() {
+    max_size_ = DEFAULT_MAX;
+    contents = new T[max_size_];
+    size_ = 0;
+}
+
+template<typename T>
+structures::ArrayList<T>::ArrayList(std::size_t max_size) {
+    max_size_ = max_size;
+    contents = new T[max_size_];
+    size_ = 0;
+}
+
+template<typename T>
+structures::ArrayList<T>::~ArrayList() {
+    delete [] contents;
+}
+
+template<typename T>
+void structures::ArrayList<T>::clear() {
+    size_ = 0
+}
+
+template<typename T>
+void structures::ArrayList<T>::push_back(const T& data) {
+    if (full()) {
+        throw std::out_of_range("lista cheia");
+    } else {
+        contents[size_] = data;
+        size_++;   
+    }
+}
+
+template<typename T>
+void structures::ArrayList<T>::push_front(const T& data) {
+    if (full()) {
+        throw std::out_of_range("lista cheia");
+    } else {
+        for (int i = size_; i > 0; i--) {
+            contents[i] = contents[i-1];
+        }
+        contents[0] = data;
+        size_++;   
+    }
+}
