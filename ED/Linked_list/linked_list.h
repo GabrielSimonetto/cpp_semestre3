@@ -107,15 +107,12 @@ structures::LinkedList<T>::~LinkedList() {
 
 template<typename T>
 void structures::LinkedList<T>::clear() {
-    if (empty()) {
-        throw std::out_of_range("lista vazia");
-    }
     Node* atual = head;
     Node* anterior = nullptr;
     while (atual != nullptr) {
         anterior = atual;
         atual = atual->next();
-        free(anterior);
+        delete(anterior);
     }
     head = nullptr;
     size_ = 0;
@@ -158,13 +155,13 @@ void structures::LinkedList<T>::insert(const T& data, std::size_t index) {
 
 template<typename T>
 void structures::LinkedList<T>::insert_sorted(const T& data) {
-    if (data < head->data()) {
+    if (empty() || data < head->data()) {
         push_front(data);
         return;
     }
     Node* anterior = head;
     Node* atual = head->next();
-    while (data < atual->data() && atual != nullptr) {
+    while (atual != nullptr && data > atual->data()) {
         anterior = atual;
         atual = atual->next();
     }
@@ -204,6 +201,7 @@ T structures::LinkedList<T>::pop(std::size_t index) {
     }
     T valor = atual->data();
     anterior->next(atual->next());
+    size_--;
     return valor;
 }
 
@@ -268,7 +266,7 @@ std::size_t structures::LinkedList<T>::find(const T& data) const {
         pos++;
         atual = atual->next();
     }
-    return -1;
+    return size_;
 }
 
 template<typename T>
