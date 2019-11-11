@@ -59,7 +59,7 @@ structures::ArrayStack<T>::ArrayStack(std::size_t max) {
     max_size_ = max;
     contents = new T[max_size_];
     top_ = -1;
-}
+
 
 template<typename T>
 structures::ArrayStack<T>::~ArrayStack() {
